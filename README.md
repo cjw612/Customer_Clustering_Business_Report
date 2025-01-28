@@ -6,23 +6,13 @@ https://archive.ics.uci.edu/dataset/352/online+retail
   - #### Project Objective:
     This project aims to compile a business analysis report through segmentation analysis of an online retail dataset.
   - #### Project Overview:
-    This project first deploys classical EDA methods to provide an overview of the dataset. Subsequently, RFM(Recency, Frequency, Monetary) indexes are created, which perform as the features used for segmentation. In addition, cancelation rate and customer activity indexes are also created to provide additional information on consumers. A comprehensive business analysis report providing next-step suggestions is derived from the results of segmentation. 
+    This project first deploys classical EDA methods to provide an overview of the dataset. Subsequently, RFM(Recency, Frequency, Monetary) indexes are created, which perform as the features used for segmentation. In addition, cancelation rate and customer activity indexes are also created to provide additional information on consumers. A comprehensive business analysis report providing next-step suggestions is derived from the results of segmentation analysis.
 
-    .
-    ![workflow](assets/analysis_flowchart.png)
-    *Project flowchart and the corresponding Python notebook files*
-  - #### Tech Stack
-    - **Programming Languages:** Python
-    - **Libraries & Frameworks:** Scikit-learn, TensorFlow, PyTorch, Transformers, NLTK, Hyperopt
-    - **Feature Engineering:** TF-IDF, Word2Vec, BERT
-    - **Machine Learning Models:** Logistic Regression, Support Vector Machine, Multilayer Perceptron
-    - **Visualization:** Matplotlib, Seaborn, WordCloud
-    - **Development & Tools:** Jupyter Notebook
 - ### Data Source
-  The dataset used for this analysis is the **"News Category Dataset" (News_Category_Dataset_v3.json)** dataset created by Rishabh Misra on [Kaggle](https://www.kaggle.com/datasets/rmisra/news-category-dataset/data).
+  The dataset used for this analysis is the **"Oline Retail" Dataset (retail.xlsx)** dataset created by Daqing Chen from the [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/dataset/352/online+retail).
 
 - ### Data Structure
-  This dataset contains 209,527 rows, with each row representing one news entry, and six columns, with each column representing data related to that particular news entry. The columns, along with a snapshot of the dataset, are depicted in the table below.
+  This dataset contains 541,909 entries, with each row representing one news entry, and six columns, with each column representing data related to that particular news entry. The columns, along with a snapshot of the dataset, are depicted in the table below.
 
 | link                                                                                               | headline                                                                                           | category   | short_description                                                                                                                            | authors                | date       |
 |----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|------------|------------------------------------------------------------------------------------------------------------------------------------------------|------------------------|------------|
