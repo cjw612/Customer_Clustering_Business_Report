@@ -65,22 +65,24 @@ https://archive.ics.uci.edu/dataset/352/online+retail
     RFM indexes are commonly used in customer segmentation, serving as a basis of segmentation based on consumer purchasing behavior. In particular, the indexes are created with the following methods: 
     - **Recency Index:** The Recency Index represents how recently a customer has completed a purchase. In this analysis, it is operationalized by computing the difference in days between the current date and the most recent purchase. However, due to the limitation of the timeframe of this dataset, the current date is set to be the date of the most recent transaction that occurred in the dataset.
       
-      $$
-      R_i = (\text{LatestDate} - \text{LastPurchaseDate}_{i}), \quad \forall i \in \text{Customers}
-      $$
-      
+        $$
+        R_i = (\text{LatestDate} - \text{LastPurchaseDate}_{i}), \quad \forall i \in \text{Customers}
+        $$
+
     - **Frequency Index:** The Frequency Index represents how frequently a customer has been purchasing. In this analysis, it is operationalized by counting the number of unique invoice numbers associated with a particular customer. The reason that the number of unique invoice numbers is used is that even if an invoice number is related to multiple products, each invoice number only represents one transaction. Therefore, to accurately reflect the purchasing frequency of a customer, unique invoice numbers should be counted since they represent unique transactions.
-          
-      $$ 
-      \max F_i = \sum_{j} x_{ij}, \quad \text{where} 
+
       $$
-      
-      $$ 
-      x_{ij} = 
+      \max F_i = \sum_{j} x_{ij}, \quad \forall i \in \text{Customers}, \forall j \in \text{Transactions}
+      $$
+    
+      **where:**
+    
+      $$
+      x_{ij} =
       \begin{cases} 
       1, & \text{if transaction } j \text{ of customer } i \text{ contains a unique invoice} \\
-      0, & \text{otherwise} 
-      \end{cases} 
+      0, & \text{otherwise}
+      \end{cases}
       $$
 
 
