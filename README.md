@@ -5,7 +5,7 @@ https://archive.ics.uci.edu/dataset/352/online+retail
   - #### Project Objective:
     This project aims to compile a business analysis report through segmentation analysis of an online retail dataset.
   - #### Project Overview:
-    This project first deploys classical EDA methods to provide an overview of the dataset. Subsequently, RFM (Recency, Frequency, Monetary) indexes are created, which perform as the features used for segmentation. In addition, cancelation rate and customer activity indexes are also created to provide additional information on consumers' characteristics. A comprehensive business analysis report providing next-step suggestions is derived from the results of segmentation analysis.
+    This project first deploys classical EDA methods to provide an overview of the dataset. Subsequently, RFM (Recency, Frequency, Monetary) indexes are created, which perform as the features used for segmentation. In addition, cancelation rate and customer activity indexes are also created to provide additional information on consumer characteristics. A  business analysis report aimed at providing next-step suggestions is derived from the results of segmentation analysis.
 
 - ### Data Source
   The dataset used for this analysis is the **"Oline Retail" Dataset (retail.xlsx)** dataset created by Daqing Chen and downloaded from the [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/dataset/352/online+retail).
@@ -50,12 +50,21 @@ https://archive.ics.uci.edu/dataset/352/online+retail
       
     As a result, we can identify that the majority of the products of this retailer are low-priced items.
 
-  - #### Country statistics
+  - #### Country Statistics
     In addition to basic summary statistics, we would also like to know where the customers and transactions have been made. Therefore, we can plot frequency histograms by transaction and customer, respectively. As a result, we can identify that the majority of our customers and transactions are based in the United Kingdom, with other Western European countries such as Germany and France following. 
     ![country](assets/country.png)
-  
+    *Frequency histogram by transaction (left) and by customer (right)*
+
+  - #### Product Statistics
+    To analyze the top products sold, we can identify the top products sold by quantity and by total value. We can identify that the top products sold either by quantity or by value are similar, such as *WHITE HANGING HEART T_LIGHT HOLDER*, *REGENCY CAKESTAND 3 TIER*, and *JUMBO BAG RED RETROSPOT* are all in the top 5 products by quantity and by value.
+    ![product](assets/product.png)
+
+  - #### Canceled Product Statistics
+    In addition to successful transactions, identifying products that are frequently canceled could also provide insights into lowering cancellation rates in the future. Similarly, we can also analyze most canceled products by both quantity and value. We can observe that the top product by value *PAPER CRAFT, LITTLE BIRDIE* is also the top canceled product by value. Further analysis into reasons why customers return these products could potentially improve both customer experience and reduce costs derived from transaction cancellations. 
+    ![canceled](assets/canceled.png)
+
 - ### Models
-  Data analysis is performed throughout three phases: text vectorization, dimension reduction, and model fitting. 
+  Data analysis is performed throughout three phases: text vectorization, dimension reduction, and model  fitting. 
   - #### Text Vectorization
     Prior to vectorizing, text is preprocessed with the _BertTokenizer_ function, which tokenizes chunks of text into individual tokens for subsequent vectorization. The following text vectorization is conducted with BERT, in particular, the _bert_base_uncased_ model. BERT was selected due to it being one of the state-of-the-art models in natural language processing. The output of BERT is a 768-dimension word embedding that represents the original text. GPU acceleration is also implemented to exploit parallel processing to reduce the runtime of the model. 
   - #### Dimension Reduction
