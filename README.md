@@ -6,21 +6,21 @@ https://archive.ics.uci.edu/dataset/352/online+retail
   - #### Project Objective:
     This project aims to compile a business analysis report through segmentation analysis of an online retail dataset.
   - #### Project Overview:
-    This project first deploys classical EDA methods to provide an overview of the dataset. Subsequently, RFM(Recency, Frequency, Monetary) indexes are created, which perform as the features used for segmentation. In addition, cancelation rate and customer activity indexes are also created to provide additional information on consumers. A comprehensive business analysis report providing next-step suggestions is derived from the results of segmentation analysis.
+    This project first deploys classical EDA methods to provide an overview of the dataset. Subsequently, RFM(Recency, Frequency, Monetary) indexes are created, which perform as the features used for segmentation. In addition, cancelation rate and customer activity indexes are also created to provide additional information on consumers' characteristics. A comprehensive business analysis report providing next-step suggestions is derived from the results of segmentation analysis.
 
 - ### Data Source
-  The dataset used for this analysis is the **"Oline Retail" Dataset (retail.xlsx)** dataset created by Daqing Chen from the [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/dataset/352/online+retail).
+  The dataset used for this analysis is the **"Oline Retail" Dataset (retail.xlsx)** dataset created by Daqing Chen and downloaded from the [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/dataset/352/online+retail).
 
 - ### Data Structure
-  This dataset contains 541,909 entries, with each row representing one news entry, and six columns, with each column representing data related to that particular news entry. The columns, along with a snapshot of the dataset, are depicted in the table below.
-
-| link                                                                                               | headline                                                                                           | category   | short_description                                                                                                                            | authors                | date       |
-|----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|------------|------------------------------------------------------------------------------------------------------------------------------------------------|------------------------|------------|
-| https://www.huffpost.com/entry/covid-boosters-uptake-us_n_632d719ee4b087fae6feaac9                | Over 4 Million Americans Roll Up Sleeves For Omicron-Targeted COVID Boosters                       | U.S. NEWS  | Health experts said it is too early to predict whether demand would match up with the 171 million doses of the new boosters the U.S. ordered | Carla K. Johnson, AP  | 2022-09-23 |
-| ... | ...                               | ...     | ...                                                                                   | ...     | ... |
-| https://www.huffingtonpost.com/entry/dwight-howard-rips-teammates-magic-hornets_us_5bb69b24e4b097869fd1b331 | Dwight Howard Rips Teammates After Magic Loss To Hornets               | SPORTS  | The five-time all-star center tore into his teammates Friday night after Orlando ... | N/A   | 2012-01-28 |
-
-
+  This dataset contains 541,909 entries, with each row representing one news entry, and eight columns, with each column representing features related to that particular news entry. A snapshot of the dataset is depicted in the following table.
+  | InvoiceNo | StockCode | Description                             | Quantity | InvoiceDate          | UnitPrice | CustomerID | Country         |
+  |-----------|----------|-----------------------------------------|----------|----------------------|-----------|------------|----------------|
+  | 536365    | 85123A   | WHITE HANGING HEART T-LIGHT HOLDER     | 6        | 2010-12-01 08:26:00  | 2.55      | 17850.0    | United Kingdom |
+  | 536365    | 71053    | WHITE METAL LANTERN                    | 6        | 2010-12-01 08:26:00  | 3.39      | 17850.0    | United Kingdom |
+  | 536365    | 84406B   | CREAM CUPID HEARTS COAT HANGER         | 8        | 2010-12-01 08:26:00  | 2.75      | 17850.0    | United Kingdom |
+  | 536365    | 84029G   | KNITTED UNION FLAG HOT WATER BOTTLE    | 6        | 2010-12-01 08:26:00  | 3.39      | 17850.0    | United Kingdom |
+  | 536365    | 84029E   | RED WOOLLY HOTTIE WHITE HEART.         | 6        | 2010-12-01 08:26:00  | 3.39      | 17850.0    | United Kingdom |
+  
   *Sample snapshot of dataset*
 
 - ### Data Cleaning and Preprocessing
