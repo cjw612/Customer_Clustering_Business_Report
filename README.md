@@ -62,36 +62,32 @@ https://archive.ics.uci.edu/dataset/352/online+retail
 
 - ### Index Creation
   - #### RFM Indexes
-    RFM indexes are commonly used in customer segmentation, serving as a basis of segmentation based on consumer purchasing behavior. In particular, the indexes are created with the following methods: 
-    - **Recency Index:** The Recency Index represents how recently a customer has completed a purchase. In this analysis, it is operationalized by computing the difference in days between the current date and the most recent purchase. However, due to the limitation of the timeframe of this dataset, the current date is set to be the date of the most recent transaction that occurred in the dataset.
+    RFM indexes are commonly used in customer segmentation, serving as a basis of segmentation based on consumer purchasing behavior. In particular, the indexes are operationalized with the following methods:
+
+    - **Recency Index:**
+    The Recency Index represents how recently a customer has completed a purchase. In this analysis, it is operationalized by computing the difference in days between the current date and the most recent purchase. However, due to the limitation of the timeframe of this dataset, the current date is set to be the date of the most recent transaction that occurred in the dataset.
+
+        $$R_i = (\text{LatestDate} - \text{LastPurchaseDate}_{i}), \quad \forall i \in \text{Customers}$$
+    
+    - **Frequency Index:**
+      The Frequency Index represents how frequently a customer has been purchasing. In this analysis, it is operationalized by counting the number of unique invoice numbers associated with a particular customer. The reason that the number of unique invoice numbers is used is that even if an invoice number is related to multiple products, each invoice number only represents one transaction. Therefore, to accurately reflect the purchasing frequency of a customer, unique invoice numbers should be counted since they represent unique transactions. 
+
+        $$F_i = \sum_{j} x_{ij}, \quad \forall i \in \text{Customers}, \forall j \in \text{Transactions}$$
+
+      In which $X_{ij}$ denotes a binary variable that is equal to one if that transaction's invoice number is unique.
+
+    - **Monetary Index:**
+      The Monetary Index represents the total monetary value spent by a customer. In this analysis, it is operationalized by summing the total revenue generated from all transactions for a specific customer. The variable $Monetary_i$ denotes the total value of a particular customer.
+
+      $$M_i = \sum_{j} \text{Monetary}_{i}, \quad \forall i \in \text{Customers}$$
+
+    - **Results:** After creating RFM Indexes, we can observe the distributions of the RFM values using histograms. However, all three indexes are heavily skewed as a result. Prior to log transformation. we first removed customers with a negative monetary value (n=42). The reason for removing such customers is that, from the retailer's perspective, these customers generate negative value for the retailer. Therefore, if these customers are placed in the same pool as other customers, the clustering algorithm may group these customers into the same cluster. In response, by removing these customers prior to clustering, we could reduce the noise created by these customers and focus on segmenting customers who generate revenue for the retailer. 
+      ![rfm_raw](assets/rfm_raw.png)
+      *Histograms of raw RFM Indexes*
       
-        $$
-        R_i = (\text{LatestDate} - \text{LastPurchaseDate}_{i}), \quad \forall i \in \text{Customers}
-        $$
-
-    - **Frequency Index:** The Frequency Index represents how frequently a customer has been purchasing. In this analysis, it is operationalized by counting the number of unique invoice numbers associated with a particular customer. The reason that the number of unique invoice numbers is used is that even if an invoice number is related to multiple products, each invoice number only represents one transaction. Therefore, to accurately reflect the purchasing frequency of a customer, unique invoice numbers should be counted since they represent unique transactions.
-
-      $$
-      \max F_i = \sum_{j} x_{ij}, \quad \forall i \in \text{Customers}, \forall j \in \text{Transactions}
-      $$
-    
-      **where:**
-    
-      $$
-      x_{ij} =
-      \begin{cases} 
-      1, & \text{if transaction } j \text{ of customer } i \text{ contains a unique invoice} \\
-      0, & \text{otherwise}
-      \end{cases}
-      $$
-
-
-
-
-
-
-
-  
+      In response, we can perform log transformation on all three indexes to reduce the skewness of their distributions. The following graph is the results after performing log transformation:
+      ![rfm_transformed](assets/rfm_transformed.png)
+      *Histograms of log transformed RFM Indexes* 
 
 - ### Results
   The results of the four models are summarized in the following table:
