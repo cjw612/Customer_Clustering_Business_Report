@@ -1,11 +1,8 @@
 # Customer Segmentation Business Analysis Report
 https://archive.ics.uci.edu/dataset/352/online+retail
 
-- ### Project Summary
-  - #### Project Objective:
-    This project aims to compile a business analysis report through segmentation analysis of an online retail dataset.
-  - #### Project Overview:
-    This project first deploys classical EDA methods to provide an overview of the dataset. Subsequently, RFM (Recency, Frequency, Monetary) indexes are created, which perform as the features used for segmentation. In addition, cancelation rate and customer activity indexes are also created to provide additional information on consumer characteristics. A  business analysis report aimed at providing next-step suggestions is derived from the results of segmentation analysis.
+- ### Project Objective and Overview
+    This project aims to compile a business analysis report through segmentation analysis of an online retail dataset. This project first deploys classical EDA methods to provide an overview of the dataset. Subsequently, RFM (Recency, Frequency, Monetary) indexes are created, which perform as the features used for segmentation. In addition, cancelation rate and customer activity indexes are also created to provide additional information on consumer characteristics. A  business analysis report aimed at providing next-step suggestions is derived from the results of segmentation analysis.
 
 - ### Data Source
   The dataset used for this analysis is the **"Oline Retail" Dataset (retail.xlsx)** dataset created by Daqing Chen and downloaded from the [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/dataset/352/online+retail).
@@ -46,7 +43,7 @@ https://archive.ics.uci.edu/dataset/352/online+retail
     - Number of unique Customer IDs: 4372
     - Number of unique Countries: 37
     - Number of unique Products: 3684
-    - Number of unique Transactions: 22190 \
+    - Number of unique Transactions: 22190 
       
     As a result, we can identify that the majority of the products of this retailer are low-priced items.
 
@@ -63,22 +60,38 @@ https://archive.ics.uci.edu/dataset/352/online+retail
     In addition to successful transactions, identifying products that are frequently canceled could also provide insights into lowering cancellation rates in the future. Similarly, we can also analyze most canceled products by both quantity and value. We can observe that the top product by value *PAPER CRAFT, LITTLE BIRDIE* is also the top canceled product by value. Further analysis into reasons why customers return these products could potentially improve both customer experience and reduce costs derived from transaction cancellations. 
     ![canceled](assets/canceled.png)
 
-- ### Models
-  Data analysis is performed throughout three phases: text vectorization, dimension reduction, and model  fitting. 
-  - #### Text Vectorization
-    Prior to vectorizing, text is preprocessed with the _BertTokenizer_ function, which tokenizes chunks of text into individual tokens for subsequent vectorization. The following text vectorization is conducted with BERT, in particular, the _bert_base_uncased_ model. BERT was selected due to it being one of the state-of-the-art models in natural language processing. The output of BERT is a 768-dimension word embedding that represents the original text. GPU acceleration is also implemented to exploit parallel processing to reduce the runtime of the model. 
-  - #### Dimension Reduction
-    After vectorization, $X_i$ is a 768-dimension vector. As the complexity of some models scales exponentially with the dimension of $X_i$, dimension reduction is applied with Principal Component Analysis (PCA). PCA performs dimension reduction while maximizing the variance retained by the reduced dimensions. To select the number of principal components to be retained, a threshold of 90% is set, i.e. the principal components would capture 90% of the total variance of all features. After applying PCA, 286 principal components are retained, replacing the original word embeddings for subsequent model fitting.
-    ![pca](assets/pca.png)
-    *Cumulative explained variance graph of PCA. The red dashed line represents the 90% level of cumulative variance explained.*
-  - #### Model Fitting
-    - **Hyperparameter tuning:** Prior to fitting each model, hyperparameters related to each model are first optimized through Bayesian Optimization with the package _hyperopt_. The package _hyperopt_ is chosen due to its flexibility over its parameters in the optimization process.
-    - **Model selection:**
-      - *Logistic Regression with l2 penalty:* Logistic regression is first applied due to its computation efficiency. Regularization is applied to lower the variance of the model in trade of slightly increased bias. Between $elasticNet$, $l1$, and $l2$ penalties, the $l2$ penalty is selected due to 1) computational efficiency over $elasticNet$ in large datasets, and 2) features should not be sparse after PCA processing. The solver parameter was set to $lbfgs$ based on the characteristics elaborated in the [scikit documentation](https://scikit-learn.org/stable/modules/linear_model.html). The hyperparameter optimized in Logistic Regression is the parameter $C$, which represents the regularization strength. 
-      - *Linear Support Vector Classification:* Linear SVC is a special instance of a Support Vector Machine (SVM). It is recommended to be implemented on large datasets in practice and also in [scikit's documentation](https://scikit-learn.org/1.5/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC). Linear SVC also applies a $l2$ regularization to the model by default. Therefore, the hyperparameter optimized in Linear SVC is also the parameter $C$, representing the regularization strength.
-      - *Multilayer Perceptron:* Multilayer perceptron is a neural network that utilizes multiple hidden layers to capture the hierarchical features. Due to the high associated computational costs, hyperparameters were also selected based on best practices instead of extensive model tuning. A three-layer MLP is implemented with the $Adam$ optimizer, along with the loss function set as $sparseCategoricalCrossentropy$, a loss function often applied in datasets with integer $y$ labels.
+- ### Index Creation
+  - #### RFM Indexes
+    RFM indexes are commonly used in customer segmentation, serving as a basis of segmentation based on consumer purchasing behavior. In particular, the indexes are created with the following methods: 
+    - **Recency Index:** The Recency Index represents how recently a customer has completed a purchase. In this analysis, it is operationalized by computing the difference in days between the current date and the most recent purchase. However, due to the limitation of the timeframe of this dataset, the current date is set to be the date of the most recent transaction that occurred in the dataset.
+      
+        $$
+        R_i = (\text{LatestDate} - \text{LastPurchaseDate}_{i}), \quad \forall i \in \text{Customers}
+        $$
 
-    In addition, K-fold Cross-Validation with $K = 5$ is also implemented for model selection to lower the variance of the results.
+    - **Frequency Index:** The Frequency Index represents how frequently a customer has been purchasing. In this analysis, it is operationalized by counting the number of unique invoice numbers associated with a particular customer. The reason that the number of unique invoice numbers is used is that even if an invoice number is related to multiple products, each invoice number only represents one transaction. Therefore, to accurately reflect the purchasing frequency of a customer, unique invoice numbers should be counted since they represent unique transactions.
+
+      $$
+      \max F_i = \sum_{j} x_{ij}, \quad \forall i \in \text{Customers}, \forall j \in \text{Transactions}
+      $$
+    
+      **where:**
+    
+      $$
+      x_{ij} =
+      \begin{cases} 
+      1, & \text{if transaction } j \text{ of customer } i \text{ contains a unique invoice} \\
+      0, & \text{otherwise}
+      \end{cases}
+      $$
+
+
+
+
+
+
+
+  
 
 - ### Results
   The results of the four models are summarized in the following table:
