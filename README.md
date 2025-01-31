@@ -1,18 +1,17 @@
 # Customer Segmentation Business Analysis Report
 https://archive.ics.uci.edu/dataset/352/online+retail
 
-
 - ### Project Summary
   - #### Project Objective:
     This project aims to compile a business analysis report through segmentation analysis of an online retail dataset.
   - #### Project Overview:
-    This project first deploys classical EDA methods to provide an overview of the dataset. Subsequently, RFM(Recency, Frequency, Monetary) indexes are created, which perform as the features used for segmentation. In addition, cancelation rate and customer activity indexes are also created to provide additional information on consumers' characteristics. A comprehensive business analysis report providing next-step suggestions is derived from the results of segmentation analysis.
+    This project first deploys classical EDA methods to provide an overview of the dataset. Subsequently, RFM (Recency, Frequency, Monetary) indexes are created, which perform as the features used for segmentation. In addition, cancelation rate and customer activity indexes are also created to provide additional information on consumers' characteristics. A comprehensive business analysis report providing next-step suggestions is derived from the results of segmentation analysis.
 
 - ### Data Source
   The dataset used for this analysis is the **"Oline Retail" Dataset (retail.xlsx)** dataset created by Daqing Chen and downloaded from the [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/dataset/352/online+retail).
 
 - ### Data Structure
-  This dataset contains 541,909 entries, with each row representing one news entry, and eight columns, with each column representing features related to that particular news entry. A snapshot of the dataset is depicted in the following table.
+  This dataset contains 541,909 entries, with a grain of one transaction per item per customer, and eight columns, with each column representing features related to that particular news entry. A snapshot of the dataset is depicted in the following table.
   | InvoiceNo | StockCode | Description                             | Quantity | InvoiceDate          | UnitPrice | CustomerID | Country         |
   |-----------|----------|-----------------------------------------|----------|----------------------|-----------|------------|----------------|
   | 536365    | 85123A   | WHITE HANGING HEART T-LIGHT HOLDER     | 6        | 2010-12-01 08:26:00  | 2.55      | 17850.0    | United Kingdom |
@@ -22,24 +21,39 @@ https://archive.ics.uci.edu/dataset/352/online+retail
   *Sample snapshot of dataset*
 
 - ### Data Cleaning and Preprocessing
-  The purpose of this phase is to perform feature transformation and reduction prior to data analysis. In addition, missing values and duplicates are also identified and deleted.
-
-  - #### Feature Removal
-    Columns $authors$, $link$, and $date$ are dropped due to the limited value provided for the analysis. The link and date are irrelevant to the news category, and although the $authors$ column did not display any missing values, there are, in fact, 37,418 missing news entries that do not have an associated author. In addition, due to the presence of more than 29,000 unique authors, the $authors$ feature may only provide limited marginal information in addition to the content itself. Therefore, the $author$ feature is excluded from subsequent data analysis. 
-  - #### Feature Transformation
-    - **Category reduction:** Given the similarity between specific categories (e.g., CULTURE & ARTS and ARTS & CULTURE), the current 42 categories are merged into a new set of eight categories based on domain knowledge and a [sample](/samples_per_category.csv) of five news entries from each category. To examine how distinct the remaining eight categories are, Latent Dirichlet Allocation and Wordclouds are deployed to examine 1) the most important words in each topic and 2) the highest-frequency words of each topic, respectively. 
-      ![wordcloud sample](assets/wordcloud_sample.png)
-      *Sample Wordcloud result for six of the post-process categories*
-    - **Headline and short_description merging:** Features $headline$ and $short description$ are also merged into a single feature $text$ to optimize computational efficiency since it can be inferred that the headline and the description of a news entry should contain similar information.
-  - #### Entry Removal
-    After performing feature removal, there are no columns; 471 duplicate entries are also removed.
+  The purpose of this phase is to preprocess the data for clustering. Since there are no missing values in this dataset, the main goal is to identify 1) duplicate values and 2) remove canceled transactions from clustering analysis. The reason to remove canceled transactions is that since these transactions are not finished, they should be analyzed separately from other transactions in order to discover which items are most often canceled. 
 
 - ### Exploratory Data Analysis
-  After preprocessing, there are only two columns remaining: $text$, which is the product of the merging of $headline$ and $short description$, and $reduced category$, which represents the new classes after merging. Therefore, EDA in this project is limited in scope and primarily aimed at exploring the relationship between words and categories. In particular, EDA is aimed to address following two questions:
+  After preprocessing, EDA is thus conducted in order to provide an overview of the current dataset. The following EDAs are performed:
+  - #### Summary Statistics
+    The following tables are the summary statistics of the qualitative and quantitative variables, respectively. Note that key and date columns (*InvoiceNo*, *StockCode*, *InvoiceDate*, *CustomerID*) are removed in this step of the analysis.
+    | Attribute   | Count  | Unique | Top                                      | Freq  |
+    |------------|--------|--------|------------------------------------------|-------|
+    | Description | 401604 | 3896   | WHITE HANGING HEART T-LIGHT HOLDER      | 2058  |
+    | Country    | 401604 | 37     | United Kingdom         | 356728 |
+    
+    *Summary statistics of qualitative variables*
 
-  - What is the distribution of categories?
-  - What are the top words associated with a specific category?
+    | Attribute   | Count    | Mean     | Std Dev     | Min       | 25%  | 50%  | 75%  | Max      |
+    |------------|---------|---------|------------|----------|------|------|------|---------|
+    | Quantity   | 401604.0 | 12.1833  | 250.2830   | -80995.0  | 2.00 | 5.00 | 12.00 | 80995.0  |
+    | UnitPrice  | 401604.0 | 3.4741   | 69.7640    | 0.0       | 1.25 | 1.95 | 3.75  | 38970.0  |
 
+    *Summary statistics of quantitative variables*
+
+    Furthermore, we would also want to know the unique values corresponding to each feature:
+    - Number of entries: 401604
+    - Number of unique Customer IDs: 4372
+    - Number of unique Countries: 37
+    - Number of unique Products: 3684
+    - Number of unique Transactions: 22190 \
+      
+    As a result, we can identify that the majority of the products of this retailer are low-priced items.
+
+  - #### Country statistics
+    In addition to basic summary statistics, we would also like to know where the customers and transactions have been made. Therefore, we can plot frequency histograms by transaction and customer, respectively. As a result, we can identify that the majority of our customers and transactions are based in the United Kingdom, with other Western European countries such as Germany and France following. 
+    ![country](assets/country.png)
+  
 - ### Models
   Data analysis is performed throughout three phases: text vectorization, dimension reduction, and model fitting. 
   - #### Text Vectorization
