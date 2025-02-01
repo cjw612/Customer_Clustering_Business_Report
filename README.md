@@ -114,15 +114,20 @@ https://archive.ics.uci.edu/dataset/352/online+retail
 
     $$C_{i}^{\text{AvgInterval}} = \frac{\sum_{j} T_{ij}^{\text{Interval}}}{N}$$
     
-    $$C_{i}^{\text{CAI}} = \frac{C_{i}^{\text{AvgInterval}} - C_{i}^{\text{WMLE}}}{C_{i}^{\text{WMLE}}}$$
+    $$C_{i}^{\text{CAI}} = \frac{C_{i}^{\text{AvgInterval}} - C_{i}^{\text{WMLE}}}{C_{i}^{\text{WMLE}}}$$    
     
-    
-- ### Clustering Results
+- ### Clustering Model
   - #### Model Selection
     Due to the small number of features in this dataset, K-Means clustering is deployed in this analysis. K-Means is a state-of-the-art clustering method often used in business contexts, providing a straightforward method for initial clustering. To determine the hyperparameter $K$, we first use the elbow method to find the $K$ associated with the most significant drop in the Within-Cluster Sum of Squares (WCSS). From the results of the following plot, we can observe that a $K$ value larger than 3 would only yield incremental improvements with respect to the (WCSS). Therefore, we set the hyperparameter $K = 3$ in this analysis.
     ![elbow](assets/elbow.png)
     *Graphical representation of the Elbow Method*
   - #### Model Results
+    After we applied K-Means clustering on our dataset with $K=3$, we can first investigate how the data is distributed across the clusters as long as there is no cluster with an unreasonably small number of data points. As a result, we can observe that the data points are spread somewhat evenly between the clusters, with the smallest cluster still having nearly 20% of the total data points.
+    ![cluster](assets/cluster.png)
+    *Distribution of data points within clusters*
+- ### Results
+    - #### Clustering
+
 
 - ### Limitations
   - The current category reduction process is based on domain knowledge with sampled data from each category. However, there may be some other set of categories that can further reduce inter-class similarity, therefore potentially further optimizing the performance of the classification models.
