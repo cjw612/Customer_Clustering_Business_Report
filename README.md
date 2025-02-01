@@ -79,24 +79,30 @@ https://archive.ics.uci.edu/dataset/352/online+retail
     - **Monetary Index:**
       The Monetary Index represents the total monetary value spent by a customer. In this analysis, it is operationalized by summing the total revenue generated from all transactions for a specific customer. The variable $Monetary_i$ denotes the total value of a particular customer.
 
-      $$M_i = \sum_{j} \text{Monetary}_{i}, \quad \forall i \in \text{Customers}$$
+      $$M_i = \sum_{j} \text{Monetary}_{i}, \quad \forall i \in \text{Customers}, \forall j \in \text{Transactions}$$
 
     - **Results:** After creating RFM Indexes, we can observe the distributions of the RFM values using histograms. However, all three indexes are heavily skewed as a result. Prior to log transformation. we first removed customers with a negative monetary value (n=42). The reason for removing such customers is that, from the retailer's perspective, these customers generate negative value for the retailer. Therefore, if these customers are placed in the same pool as other customers, the clustering algorithm may group these customers into the same cluster. In response, by removing these customers prior to clustering, we could reduce the noise created by these customers and focus on segmenting customers who generate revenue for the retailer. 
       ![rfm_raw](assets/rfm_raw.png)
       *Histograms of raw RFM Indexes*
       
-      In response, we can perform log transformation on all three indexes to reduce the skewness of their distributions. The following graph is the results after performing log transformation:
+      In response, we can perform log transformations on all three indexes to mitigate the skewness of their distributions. The following graph depicts the results after performing log transformation:
       ![rfm_transformed](assets/rfm_transformed.png)
-      *Histograms of log transformed RFM Indexes* 
+      *Histograms of log-transformed RFM Indexes*
+      
+  - #### Cancelation Rate
+    In order to analyze the cancelation rate of each customer, a cancelation rate is calculated for each customer. The cancelation rate for the $ith$ customer is calculated by dividing transactions canceled by the $ith$ customer over all transactions made by that customer.
+  - #### Customer Activity Index
+    The Customer Activity Index (CAI) represents the activity level of a customer, with a higher numeric value indicating a higher activity level. CAI is operationalized with the following procedures:
+    
+    First, we denote the $ith$ customer as $C_i$ and the $jth$ transactions made by that customer as $T_{ij}$, we first compute the intervals between each purchases:
+    
+    $$C_{i}^{\text{Interval}} = T_{ij}^{\text{InvoiceDate}} - T_{i(j-1)}^{\text{InvoiceDate}}$$
+    
+    Then we assign weights
 
+    
 - ### Results
-  The results of the four models are summarized in the following table:
 
-  | Model               | Accuracy   | Precision   | Recall    | F1-Score   |
-  |:--------------------|:-----------|:------------|:----------|:-----------|
-  | Logistic Regression | 0.740625   | 0.727775    | 0.740625  | 0.72769    |
-  | LinearSVC           | 0.735234   | 0.723957    | 0.735234  | 0.713178   |
-  | MLP                 | 0.744356   | 0.738371    | 0.744356  | 0.74052    |
 
 
 - ### Limitations
