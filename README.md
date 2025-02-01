@@ -94,15 +94,33 @@ https://archive.ics.uci.edu/dataset/352/online+retail
   - #### Customer Activity Index
     The Customer Activity Index (CAI) represents the activity level of a customer, with a higher numeric value indicating a higher activity level. CAI is operationalized with the following procedures:
     
-    First, we denote the $ith$ customer as $C_i$ and the $jth$ transactions made by that customer as $T_{ij}$, we first compute the intervals between each purchases:
+    First, we denote the $ith$ customer as $C_i$ and its corresponding $j$ transactions $T_{ij}$, we first compute the intervals between each purchases:
     
-    $$C_{i}^{\text{Interval}} = T_{ij}^{\text{InvoiceDate}} - T_{i(j-1)}^{\text{InvoiceDate}}$$
+    $$T_{i}^{\text{Interval}} = T_{ij}^{\text{InvoiceDate}} - T_{i(j-1)}^{\text{InvoiceDate}}$$
     
-    Then we assign weights
+    We then assign weights in ascending order from earliest purchase to newest, 
 
-    
-- ### Results
+    $$T_{ij}^{\text{weight}} = j$$
 
+    After we obtained the weights and intervals, we then compute the product of customer $i$ by summing up the product of all pairs of intervals and weights:
+
+    $$C_{i}^{\text{Product}} = \sum_{j} T_{ij}^{\text{weight}} \cdot T_{ij}^{\text{Interval}}$$
+
+    Then, we yield the WMLE (Weighted Mean Logarithmic Expectation) by deviding the product by the sum of weights:
+
+    $$C_{i}^{\text{WMLE}} = \frac{C_{i}^{\text{Product}}}{\sum_{j} T_{ij}^{\text{weight}}}$$
+
+    To yield the final CAI, we compute the difference between the average interval and the WMLE. Since the WMLE represents the expected average purchasing interval from consumers' historical transactions, a CAI greater than 0 indicates that a consumer is purchasing more often than its expected purchasing interval. 
+
+    $$C_{i}^{\text{AvgInterval}} = \frac{\sum_{j} T_{ij}^{\text{Interval}}}{N}$$
+    
+    $$C_{i}^{\text{CAI}} = \frac{C_{i}^{\text{AvgInterval}} - C_{i}^{\text{WMLE}}}{C_{i}^{\text{WMLE}}}$$
+    
+    
+- ### Clustering Results
+  - #### Model Selection
+    Due to the small number of features in this dataset, K-Means clustering is deployed in this analysis. K-Means is a state-of-the-art clustering method often used in business contexts, providing a straightforward method for initial clustering. To determine the hyperparameter $K$, we first use the elbow method to find the $K$ associated with the most significant drop in the Within-Cluster Sum of Squares (WCSS). From the results of the following plot, we can observe that a $K$ value larger than 3 would only yield incremental improvements with respect to the (WCSS). Therefore, we set the hyperparameter $K = 3$ in this analysis.
+    ![elbow](\assets\elbow.png)
 
 
 - ### Limitations
