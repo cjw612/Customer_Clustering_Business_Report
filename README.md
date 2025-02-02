@@ -5,7 +5,7 @@ https://archive.ics.uci.edu/dataset/352/online+retail
     This project aims to compile a business analysis report through segmentation analysis of an online retail dataset. This project first deploys classical EDA methods to provide an overview of the dataset. Subsequently, RFM (Recency, Frequency, Monetary) indexes are created, which perform as the features used for segmentation. In addition, cancelation rate and customer activity indexes are also created to provide additional information on consumer characteristics. A  business analysis report aimed at providing next-step suggestions is derived from the results of segmentation analysis.
 
 - ### Data Source
-  The dataset used for this analysis is the **"Oline Retail" Dataset (retail.xlsx)** dataset created by Daqing Chen and downloaded from the [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/dataset/352/online+retail).
+  The dataset used for this analysis is the **"Oline Retail" Dataset (retail.xlsx)** dataset, containing transaction data from 01/12/2010 to 09/12/2011 of a UK-based online retail. This data set is created by Daqing Chen and downloaded from the [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/dataset/352/online+retail).
 
 - ### Data Structure
   This dataset contains 541,909 entries, with a grain of one transaction per item per customer, and eight columns, with each column representing features related to that particular news entry. A snapshot of the dataset is depicted in the following table.
@@ -126,7 +126,14 @@ https://archive.ics.uci.edu/dataset/352/online+retail
     ![cluster](assets/cluster.png)
     *Distribution of data points within clusters*
 - ### Results
-    - #### Clustering
+    - #### Clustering Results
+      According to the clustering results based on RFM Indexes, we can identify the following groups of customers:
+      - **Cluster 1 - Loyal Customers:** The first cluster consists of customers with a well-rounded performance across all indexes. These customers have moderate RFM and CAI values when compared with other clusters, in addition to low cancellation rates. We can, therefore, infer that customers in cluster 1 are loyal customers with a certain amount of brand loyalty to the retail. 
+      - **Cluster 2 - High-Value Customers:** The second cluster consists of customers with a high level of engagement (CAI), as well as high frequency and monetary values, suggesting that these customers may be newly acquired and active. However, these customers are currently displaying a lower recency value and a higher cancellation rate when compared with the other two clusters. These customers may only make a large number of transactions in specific periods, which reflects the relatively low recency value. 
+      - **Cluster 3 - Occasional Customers:** The third cluster consists of customers with a high recency value yet a low monetary and frequency value. This suggests that these customers shop more infrequently and spend less than other customers, in addition to a lower CAI value, further suggesting that these customers may have a lower engagement when compared with other clusters of customers. 
+    - #### Clustering Behavior Analysis
+      - **Transaction Time** We can observe that the majority of transactions are made from noon to late afternoon, regardless of class. This may indicate that 
+     
 
 
 - ### Limitations
