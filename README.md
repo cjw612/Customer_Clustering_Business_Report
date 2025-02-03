@@ -125,16 +125,25 @@ https://archive.ics.uci.edu/dataset/352/online+retail
     After we applied K-Means clustering on our dataset with $K=3$, we can first investigate how the data is distributed across the clusters as long as there is no cluster with an unreasonably small number of data points. As a result, we can observe that the data points are spread somewhat evenly between the clusters, with the smallest cluster still having nearly 20% of the total data points.
     ![cluster](assets/cluster.png)
     *Distribution of data points within clusters*
+    
 - ### Results
     - #### Clustering Results
-      According to the clustering results based on RFM Indexes, we can identify the following groups of customers:
+      According to the clustering results based on RFM Indexes, we can plot the three clusters into a radar plot to have an overview of the different features of the clusters:   
+        ![radar](assets/radar.png)\
+        *Radar plot of clusters against features*\
+      We can thus identify the following clusters of customers:\
       - **Cluster 1 - Loyal Customers:** The first cluster consists of customers with a well-rounded performance across all indexes. These customers have moderate RFM and CAI values when compared with other clusters, in addition to low cancellation rates. We can, therefore, infer that customers in cluster 1 are loyal customers with a certain amount of brand loyalty to the retail. 
       - **Cluster 2 - High-Value Customers:** The second cluster consists of customers with a high level of engagement (CAI), as well as high frequency and monetary values, suggesting that these customers may be newly acquired and active. However, these customers are currently displaying a lower recency value and a higher cancellation rate when compared with the other two clusters. These customers may only make a large number of transactions in specific periods, which reflects the relatively low recency value. 
       - **Cluster 3 - Occasional Customers:** The third cluster consists of customers with a high recency value yet a low monetary and frequency value. This suggests that these customers shop more infrequently and spend less than other customers, in addition to a lower CAI value, further suggesting that these customers may have a lower engagement when compared with other clusters of customers. 
     - #### Clustering Behavior Analysis
-      - **Transaction Time** We can observe that the majority of transactions are made from noon to late afternoon, regardless of class. This may indicate that 
-     
-
+      - **Transaction Time** We can observe that the majority of transactions are made from noon to late afternoon, regardless of which cluster the customer is in. Following the assumption that transactions are recorded at the moment that they are made by consumers, this may indicate that the customers are mainly purchasing during standard working hours or lunch breaks, as apposed to making purchases after work.
+        ![time](assets/time.png)
+        *Transaction Frequency by Hour of all clusters*
+      - **Top Products by Cluster:** We can observe that in terms of both frequency and total value, cluster 1 and cluster 3 display similar purchasing behavior with a high overlap on top products. However, we can also observe that cluster 2 displayed a different purchasing behavior with the other two clusters. For example, products *RABBIT NIGHT LIGHT*, *CHILLI LIGHTS*, and *BLACK RECORD COVER FRAME* did not appear in the top 10 products of either cluster 1 and cluster 3.
+        ![product_cluster](assets/product_cluster.png)
+        *Top products by frequency and value purchased of all clusters*
+        
+- ### Implications
 
 - ### Limitations
   - The current category reduction process is based on domain knowledge with sampled data from each category. However, there may be some other set of categories that can further reduce inter-class similarity, therefore potentially further optimizing the performance of the classification models.
