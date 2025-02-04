@@ -143,7 +143,13 @@ https://archive.ics.uci.edu/dataset/352/online+retail
         ![product_cluster](assets/product_cluster.png)
         *Top products by frequency and value purchased of all clusters*
         
-- ### Implications
+- ### Strategic Implications
+    - #### Micro level: Personalized Recommendations
+      In this transaction dataset, we have information not only on each transaction but also on which customers are linked to the transactions. Therefore, on a micro level, a personalized recommendation system based on each customer's purchasing history and behavior could be implemented to accompany the meso and macro-level strategies. For example, similar to Amazon's personalized recommendation system, the retailer can categorize products into different categories, such as products that are often recurrently purchased, and then recommend products based on their categories and the customer's purchasing history. By aggregating data on a customer level, the retailer can, therefore, implement personalized recommendation systems to potentially increase churn, ARPC, and even the overall user experience. 
+    - #### Segmentation-Based Strategies
+      - **Cluster 1 - Loyal Customers:**
+      The retailer 
+
 
 - ### Limitations
   - The current category reduction process is based on domain knowledge with sampled data from each category. However, there may be some other set of categories that can further reduce inter-class similarity, therefore potentially further optimizing the performance of the classification models.
