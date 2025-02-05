@@ -133,7 +133,7 @@
         *Radar plot of clusters against features (scaled)*\
         ![heatmap](assets/heatmap.png)\
         *Heatmap of clusters against features (scaled)*\
-      We can thus identify the following clusters of customers:\
+      We can thus identify the following clusters of customers:
       - **Cluster 1 - Loyal Customers:** The first cluster consists of customers with a well-rounded performance across all indexes. These customers have moderate RFM and CAI values when compared with other clusters, in addition to low cancellation rates. We can, therefore, infer that customers in cluster 1 are loyal customers with a certain amount of brand loyalty to the retail. 
       - **Cluster 2 - High-Value Customers:** The second cluster consists of customers with a high level of engagement (CAI), as well as high frequency and monetary values, suggesting that these customers may be newly acquired and active. However, these customers are currently displaying a lower recency value and a higher cancellation rate when compared with the other two clusters. These customers may only make a large number of transactions in specific periods, which reflects the relatively low recency value. 
       - **Cluster 3 - Occasional Customers:** The third cluster consists of customers with a high recency value yet a low monetary and frequency value. This suggests that these customers shop more infrequently and spend less than other customers, in addition to a lower CAI value, further suggesting that these customers may have a lower engagement when compared with other clusters of customers. 
