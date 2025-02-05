@@ -1,5 +1,5 @@
 # Customer Segmentation Business Analysis Report
-![photo](assets/card.png)
+
 
 - ### Project Objective and Overview
     This project aims to compile a business analysis report from a business consultant's perspective through segmentation analysis of an online retail dataset. This project first deploys classical EDA methods to provide an overview of the dataset. Subsequently, RFM (Recency, Frequency, Monetary) indexes are created, which perform as the features used for segmentation. In addition, cancelation rate and customer activity indexes are also created to provide additional information on consumer characteristics. A  business analysis report aimed at providing next-step suggestions is derived from the results of segmentation analysis.
