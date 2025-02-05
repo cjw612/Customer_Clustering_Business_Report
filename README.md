@@ -2,7 +2,7 @@
 ![photo](assets/card.png)
 
 - ### Project Objective and Overview
-    This project aims to compile a business analysis report from a business consultant's perspective through segmentation analysis of an online retail dataset. This project first deploys classical EDA methods to provide an overview of the dataset. Subsequently, RFM (Recency, Frequency, Monetary) indexes are created, which perform as the features used for segmentation. In addition, cancelation rate and customer activity indexes are also created to provide additional information on consumer characteristics. A  business analysis report aimed at providing next-step suggestions is derived from the results of segmentation analysis.
+    This project aims to compile a business analysis report from a business consultant's perspective through segmentation analysis of an online retail dataset. This project first deploys classical EDA methods to provide an overview of the dataset. Subsequently, RFM (Recency, Frequency, Monetary) indexes are created, which perform as the features used for segmentation. In addition, cancelation rate and customer activity indexes are also created to provide additional information on consumer characteristics. A business analysis report aimed at providing next-step suggestions is derived from the results of segmentation analysis.
 
 - ### Data Source
   The dataset used for this analysis is the **"Online Retail" Dataset (retail.xlsx)** dataset, containing transaction data from 01/12/2010 to 09/12/2011 of a UK-based online retailer. This data et was created by Daqing Chen and downloaded from the [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/dataset/352/online+retail).
@@ -128,9 +128,11 @@
     
 - ### Results
     - #### Clustering Results
-      According to the clustering results based on RFM Indexes, we can plot the three clusters into a radar plot to have an overview of the different features of the clusters:   
+      According to the clustering results based on RFM Indexes, we can plot the three clusters into a radar plot and a heatmap to have an overview of the different features of the clusters:   
         ![radar](assets/radar.png)\
-        *Radar plot of clusters against features*\
+        *Radar plot of clusters against features (scaled)*\
+        ![heatmap](assets/heatmap.png)\
+        *Heatmap of clusters against features (scaled)*\
       We can thus identify the following clusters of customers:\
       - **Cluster 1 - Loyal Customers:** The first cluster consists of customers with a well-rounded performance across all indexes. These customers have moderate RFM and CAI values when compared with other clusters, in addition to low cancellation rates. We can, therefore, infer that customers in cluster 1 are loyal customers with a certain amount of brand loyalty to the retail. 
       - **Cluster 2 - High-Value Customers:** The second cluster consists of customers with a high level of engagement (CAI), as well as high frequency and monetary values, suggesting that these customers may be newly acquired and active. However, these customers are currently displaying a lower recency value and a higher cancellation rate when compared with the other two clusters. These customers may only make a large number of transactions in specific periods, which reflects the relatively low recency value. 
@@ -160,7 +162,8 @@
   - **Lacking Customer Metadata:** Since customer metadata is not available from this dataset, we were not able to analyze the demographic distribution of customers or the interaction effect between demographic variables and the indexes. However, customer metadata could provide huge potential to expand the scope and depth of this analysis by incorporating demographic data with behavioral data. For instance, we could also perform demographic-based clustering on this dataset or even perform hypothesis testing on the current clusters to identify whether there's a significant difference between demographic variables across clusters. 
   - **Lacking Product Metadata:** Product category metadata is also not available from this dataset. The current product-related data in this dataset only consists of the *Description*, which, in itself, provides limited information regarding what kind of product it is. However, the presence of product category metadata could provide sufficient information for analyzing this dataset on a coarser grain level. For instance, with the product category in hand, we could perform a Basket Analysis to find how categories are related to each other.
   - **Lacking Industry-level and Company-level Business Context:** Without knowing the industry and company contexts, we were not able to provide the retailer with strategic suggestions based on the context in which the retailer is operating. For example, information on the competitive landscape could provide us with more information on where the retailer's strategy should focus, e.g., new customer acquisition or retaining customers. 
-  - **Lacking Marketing and Promotional Data:** This dataset also lacks marketing or promotional data. There is no information on whether transactions were influenced by discounts, promotions, or events organized by the retailer. As a result, we can only assume that purchasing behavior is not affected by discounts or marketing campaigns, which is an unrealistic assumption that may distort our final analysis. Incorporating marketing and promotional data could provide the retailer with insights into the performance of its campaigns, as well as "remapping" the consumers' purchasing behavior to take discounts and marketing campaigns into consideration. 
+  - **Lacking Marketing and Promotional Data:** This dataset also lacks marketing or promotional data. There is no information on whether transactions were influenced by discounts, promotions, or events organized by the retailer. As a result, we can only assume that purchasing behavior is not affected by discounts or marketing campaigns, which is an unrealistic assumption that may distort our final analysis. Incorporating marketing and promotional data could provide the retailer with insights into the performance of its campaigns, as well as "remapping" the consumers' purchasing behavior to take discounts and marketing campaigns into consideration.
+  - **Limited Clustering Methodology:** Without 
 
 - ### References
   [1] jarmoluk, pixabay, https://pixabay.com/photos/money-cards-business-credit-card-256319/ \
